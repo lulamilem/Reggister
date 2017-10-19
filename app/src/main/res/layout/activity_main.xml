@@ -12,19 +12,18 @@
     tools:context="com.example.admin.regg.MainActivity">
 
     <LinearLayout
-        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="User Registration"
-            android:id="@+id/textView"
-            android:layout_gravity="center_horizontal" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="119dp"
+            android:src="@drawable/backlogo"/>
 
         <EditText
             android:id="@+id/editTextEmail"
