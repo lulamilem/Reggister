@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Regg</string>
+    <string name="not_logged_in">not_logged_in</string>
+    <string name="not_log_in">not_log_in</string>
 </resources>

@@ -12,6 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,6 +30,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView textViewSignup;
+    //corr
+
+    private GoogleApiClient googleApiClient;
+
+    private SignInButton signInButton;
+
+    public static final int SIGN_IN_CODE = 777;
 
     //firebase auth object
     private FirebaseAuth firebaseAuth;
@@ -37,6 +49,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        signInButton = (SignInButton) findViewById(R.id.signInButton);
+
+        signInButton.setSize(SignInButton.SIZE_WIDE);
+
+        signInButton.setColorScheme(SignInButton.COLOR_DARK);
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                startActivityForResult(intent, SIGN_IN_CODE);
+            }
+        });
 
         //getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
@@ -96,8 +126,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if(task.isSuccessful()){
                             //start the profile activity
                             finish();
+
+
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }
+
                     }
                 });
 
@@ -109,9 +142,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             userLogin();
         }
 
-        if(view == textViewSignup){
+        if(view == textViewSignup) {
             finish();
             startActivity(new Intent(this, MainActivity.class));
+
+        }}
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SIGN_IN_CODE) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
         }
     }
+    
+    private void handleSignInResult(GoogleSignInResult result) {
+        if (result.isSuccess()) {
+            goMainScreen();
+        } else {
+            Toast.makeText(this, R.string.not_log_in, Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void goMainScreen() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+    }
+
 }
