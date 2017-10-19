@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             handleSignInResult(result);
         }
     }
-    
+
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             goMainScreen();
