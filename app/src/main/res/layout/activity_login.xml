@@ -66,8 +66,7 @@
         android:id="@+id/textView2"
         android:layout_above="@+id/signInButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="11dp" />
+        android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/buttonSignin"

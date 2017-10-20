@@ -72,19 +72,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"These Field Must Not Be Blank",Toast.LENGTH_LONG).show();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"These Field Must Not Be Blank ",Toast.LENGTH_LONG).show();
             return;
         }
 
         //if the email and password are not empty
         //displaying a progress dialog
 
-        progressDialog.setMessage("Registering Please Wait...");
+        progressDialog.setMessage("Please Wait Still Processing");
         progressDialog.show();
 
         //creating a new user
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }else{
                             //display some message here
-                            Toast.makeText(MainActivity.this,"Registration Error",Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this,"Already Registered",Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
                     }
