@@ -44,10 +44,9 @@
         <Button
             android:id="@+id/buttonSignup"
             android:layout_width="match_parent"
-            android:layout_height="61dp"
+            android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:background="@drawable/signup"
-            />
+            android:text="Signup" />
 
         <TextView
             android:text="Already Registered? Signin Here"
